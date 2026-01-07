@@ -1,0 +1,31 @@
+name: Daily Mail Scheduler
+
+on:
+  schedule:
+    # This is 10:00 PM IST (4:30 PM UTC)
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+
+jobs:
+  send_mail:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Run mail script
+        env:
+          EMAIL_ID: ${{ secrets.EMAIL_ID }}
+          EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
+          MONGO_URI: ${{ secrets.MONGO_URI }}
+        run: python mail_schedule2.py
