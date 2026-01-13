@@ -23,12 +23,17 @@ shift=[]
 for i in user_name:
     coll=shift_db[i]
     res=coll.find_one({"date":tomorrow})
-    manpower.append(res['manpower'])
-    shift.append(res['shift'])
+    manpower.append(res.get('manpower'))
+    shift.append(res.get('shift'))
+    coll.delete_many({
+        "date":{"$lt" : tomorrow}
+    })
+
 
 
 
     
+
 
 
 
