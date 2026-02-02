@@ -16,7 +16,7 @@ def send_email(email, msg):
     yag = yagmail.SMTP(sender, password)
     yag.send(
         to=receiver,
-        subject=f"Tomorrow ({dt.day}-{dt.month}-{dt.year}) Shift",
+        subject=f"Shift Man power of NCU-AU Instrumentation",
         contents=msg
     )
 
@@ -46,5 +46,6 @@ for i in range(len(user_name)):
         """
 
     send_email(user_email[i], msg)
+
 
 
