@@ -31,12 +31,20 @@ for i in range(len(user_name)):
 
         Enjoy your day!
         """
+    elif shift[i]==None:
+        msg=f"""
+        Hey, {user_name[i]},
+        No shift schedule!!! Please Upload shift schedule.
+        """
     else:
         msg=f"""
-        Hi {user_name[i]},
-        Tomorrow your shift is {shift[i]},
-        Manpowers are :- {", ".join (manpower[i])}
-    """
+        Date: {dt.day}/{dt.month}/{dt.year}
+        Shift: {shift[i]}
+        Shift Engineer (Inst): {user_name[i]} 
+        Shift Technicians (Inst): {", ".join (manpower[i])} 
+        Contact No.: 2844 / 2853 / {user_mobile[i]}
+        """
 
     send_email(user_email[i], msg)
+
 
