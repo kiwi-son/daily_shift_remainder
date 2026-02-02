@@ -24,6 +24,7 @@ shift=[]
 
 for i in user_name:
     coll=shift_db[i]
+    res=coll.find_one({"date":tomorrow})
     if res is not None:
         manpower.append(res.get('manpower'))
         shift.append(res.get('shift'))
@@ -38,6 +39,7 @@ for i in user_name:
 
 
     
+
 
 
 
