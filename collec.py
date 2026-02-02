@@ -14,17 +14,22 @@ shift_db=client['shift'] #shift schedule database
 user=db['user']
 user_email=[]
 user_name=[]
+user_mobile=[]
 for i in user.find():
     user_email.append(i.get('email'))
     user_name.append(i.get('name'))
+    user_mobile.append(i.get('mobile'))
 manpower=[]
 shift=[]
 
 for i in user_name:
     coll=shift_db[i]
-    res=coll.find_one({"date":tomorrow})
-    manpower.append(res.get('manpower'))
-    shift.append(res.get('shift'))
+    if res is not None:
+        manpower.append(res.get('manpower'))
+        shift.append(res.get('shift'))
+    else:
+        manpower.append(None)   
+        shift.append(None)
     coll.delete_many({
         "date":{"$lt" : tomorrow}
     })
@@ -33,6 +38,7 @@ for i in user_name:
 
 
     
+
 
 
 
